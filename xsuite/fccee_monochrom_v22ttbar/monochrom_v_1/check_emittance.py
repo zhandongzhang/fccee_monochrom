@@ -2,14 +2,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import xtrack as xt
 
-line = xt.Line.from_json('ring_monochrom_v_thin.json')
+line = xt.Line.from_json('ring_monochromv_thin.json')
 
 line.build_tracker()
 
 tw_no_rad = line.twiss(method='4d')
 
 line.vars['voltca1'] = 2.1
-line.vars['lagca1'] = 0.34730109836129514
+line.vars['lagca1'] = 0.34730109836129508
 
 line.configure_radiation(model='mean')
 line.compensate_radiation_energy_loss()
@@ -42,7 +42,7 @@ spco.plot(tw_rad_wig_off ['s'], tw_rad_wig_off ['y'])
 spdisp.plot(tw_rad_wig_off ['s'], tw_rad_wig_off ['dx'])
 spdisp.plot(tw_rad_wig_off ['s'], tw_rad_wig_off ['dy'])
 
-spbet.set_xlim(tw_rad_wig_off ['s', 'ip.4'] - 1000, tw_rad_wig_off ['s', 'ip.4'] + 500)
+spbet.set_xlim(tw_rad_wig_off ['s', 'ip.4'] - 1000, tw_rad_wig_off ['s', 'ip.4'] + 400)
 
 spbet.set_ylabel(r'$\beta_{x,y}$ [m]')
 spco.set_ylabel(r'(Closed orbit)$_{x,y}$ [m]')
