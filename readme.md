@@ -5,4 +5,4 @@ The project '*Optics Design of a Transverse Monochromatic Scheme for the Direct 
 #### The two versions:
 1. **MADX version**: The code MADX is what we used to design the FCCee monochromatization optics.
 
-2. **Xsuite version**: The designed FCCee monochromatization lattices in MADX are transfered to Xsuite version for further performance check. The beam parameters at all the eight straight sections are rematched after transfered to the thin Xsuite json file.
+2. **Xsuite version**: The designed FCCee monochromatization lattices in MADX are transfered to Xsuite version for further performance check. The beam parameters at all the eight straight sections are rematched after transfered to the thin Xsuite .json file.
