@@ -21,7 +21,7 @@ ey = tw_rad_wig_off.eq_gemitt_y
 ez = tw_rad_wig_off.eq_gemitt_zeta
 
 print('\n Beam parameters at the IPs:')
-tw_rad_wig_off.rows['ip.*'].cols['betx bety dx dpx'].show()
+tw_rad_wig_off.rows['ip.*'].cols['betx alfx bety alfy dx dpx dy dpy'].show()
 
 print('\n Emittance:')
 print('Ex:', ex)
