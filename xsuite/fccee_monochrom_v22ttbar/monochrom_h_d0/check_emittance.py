@@ -9,7 +9,7 @@ line.build_tracker()
 tw_no_rad = line.twiss(method='4d')
 
 line.vars['voltca1'] = 2.1
-line.vars['lagca1'] = 0.33709263654898292
+line.vars['lagca1'] = 0.33712818180051002
 
 line.configure_radiation(model='mean')
 line.compensate_radiation_energy_loss()
@@ -19,6 +19,12 @@ tw_rad_wig_off = line.twiss(eneloss_and_damping=True)
 ex = tw_rad_wig_off.eq_gemitt_x
 ey = tw_rad_wig_off.eq_gemitt_y
 ez = tw_rad_wig_off.eq_gemitt_zeta
+eloss_turn = tw_rad_wig_off.eneloss_turn
+alfa = tw_rad_wig_off.momentum_compaction_factor
+qs = tw_rad_wig_off.qs
+damping_time = 1/(tw_rad_wig_off.damping_constants_s[2])
+sigma_z = np.sqrt(tw_rad_wig_off.bets0*ez)
+sige = sigma_z*2*np.pi*qs/alfa/tw_rad_wig_off.circumference
 
 print('\n Beam parameters at the IPs:')
 tw_rad_wig_off.rows['ip.*'].cols['betx alfx bety alfy dx dpx dy dpy'].show()
@@ -27,6 +33,18 @@ print('\n Emittance:')
 print('Ex:', ex)
 print('Ey:', ey)
 print('Ez:', ez)
+print('\n Energy loss per turn:')
+print(eloss_turn)
+print('\n Momentum compaction factor :')
+print(alfa)
+print('\n Energy spread:')
+print(sige)
+print('\n Bunch length:')
+print(sigma_z)
+print('\n Sychrotron tune:')
+print(qs)
+print('\n Longitudinal damping time:')
+print(damping_time)
 
 fig1 = plt.figure(1, figsize=(6.4, 4.8*1.5))
 spbet = plt.subplot(3,1,1)
