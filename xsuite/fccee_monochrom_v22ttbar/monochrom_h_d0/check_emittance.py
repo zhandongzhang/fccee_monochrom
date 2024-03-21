@@ -58,7 +58,7 @@ spco.plot(tw_rad_wig_off ['s'], tw_rad_wig_off ['x'])
 spco.plot(tw_rad_wig_off ['s'], tw_rad_wig_off ['y'])
 
 spdisp.plot(tw_rad_wig_off ['s'], tw_rad_wig_off ['dx'])
-spdisp.plot(tw_rad_wig_off ['s'], tw_rad_wig_off ['dy'])
+# spdisp.plot(tw_rad_wig_off ['s'], tw_rad_wig_off ['dy'])
 
 spbet.set_xlim(tw_rad_wig_off ['s', 'ip.4'] - 1000, tw_rad_wig_off ['s', 'ip.4'] + 500)
 
