@@ -1,0 +1,29 @@
+set,format="-20s","23.17g";
+option, update_from_parent=true, -echo, -info, -warn;
+
+CALL, FILE="ring_monochrom_mix.seq";
+
+pbeam :=  62.5 ;
+Ebeam := sqrt( pbeam^2 + emass^2 );
+Nbun :=   13420; NPar :=  0.559e11;
+EXbeam = 2.5E-9; EYbeam = 2E-12;
+HalfCrossingAngle = 0.015;
+
+BEAM, PARTICLE=POSITRON, NPART=Npar, KBUNCH=Nbun, ENERGY=Ebeam, RADIATE=TRUE, BV=+1, EX=EXbeam, EY=EYbeam;
+
+USE, SEQUENCE = monolattice_mix;
+
+TWISS, TAPERING, file="ring_monochrom_mix_tapered.tfs";
+plot, haxis=s, hmin=0, hmax=91175, vaxis1=betx,bety, vaxis2=dx,dy colour=100, title="MonochroMd0 Ring Tapered", NOVERSION=true, file="ring_monochrom_mix_tapered";
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx,dy colour=100, range= ff1.1/fg.3, title="MonochroMd0 IR1 Tapered", NOVERSION=true, file="ring_monochrom_mix_tapered";
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx,dy colour=100, range= ff1.2/fg.5, title="MonochroMd0 IR2 Tapered", NOVERSION=true, file="ring_monochrom_mix_tapered";
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx,dy colour=100, range= ff1.3/fg.7, title="MonochroMd0 IR3 Tapered", NOVERSION=true, file="ring_monochrom_mix_tapered";
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx,dy colour=100, range= ff1.4/fg.1, title="MonochroMd0 IR4 Tapered", NOVERSION=true, file="ing_monochrom_mix_tapered";
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx,dy colour=100, range= fg.3/ff1.2, title="MonochroMd0 ARC Tapered", NOVERSION=true, file="ring_monochrom_mix_tapered";
+
+system, "ps2pdf ring_monochrom_mix_tapered.ps ring_monochrom_mix_tapered.pdf";
+system, "rm -f ring_monochrom_mix_tapered.ps";
+
+EMIT, DELTAP=0.0;
+WRITE, TABLE=emit, FILE="emittab_monochrom_mix.tfs";
+WRITE, TABLE=emitsumm, FILE="emitsums_monochrom_mix.tfs";

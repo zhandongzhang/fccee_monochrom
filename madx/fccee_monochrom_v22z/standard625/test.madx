@@ -1,0 +1,30 @@
+set,format="-20s","23.17g";
+option, update_from_parent=true, -echo, -info, -warn;
+
+CALL, FILE="fccee_z625.seq";
+
+pbeam :=   62.5;
+EXbeam = 7.1e-10;
+EYbeam = 1.42e-12;
+Nbun :=    13420;
+NPar :=   55900000000.0;
+HalfCrossingAngle = 0.015;
+Ebeam := sqrt( pbeam^2 + emass^2 );
+
+BEAM, PARTICLE=POSITRON, NPART=Npar, KBUNCH=Nbun, ENERGY=Ebeam, RADIATE=TRUE, BV=+1, EX=EXbeam, EY=EYbeam;
+
+USE, SEQUENCE = FCCEE_P_RING;
+
+TWISS, TAPERING, file="ring_standard625_tapered.tfs";
+plot, haxis=s, hmin=0, hmax=91175, vaxis1=betx,bety, vaxis2=dx, colour=100, range= #s/#e, title="V22 ttbar 625 Ring Tapered", NOVERSION=true, file="ring_standard625_tapered";
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx, colour=100, range= ff1.1/fg.3, title="V22 ttbar 625 IR1 Tapered", NOVERSION=true, file="ring_standard625_tapered";
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx, colour=100, range= ff1.2/fg.5, title="V22 ttbar 625 IR2 Tapered", NOVERSION=true, file="ring_standard625_tapered";
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx, colour=100, range= ff1.3/fg.7, title="V22 ttbar 625 IR3 Tapered", NOVERSION=true, file="ring_standard625_tapered";
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx, colour=100, range= fg.3/ff1.2, title="V22 ttbar 625 ARC Tapered", NOVERSION=true, file="ring_standard625_tapered";
+
+system, "ps2pdf ring_standard625_tapered.ps ring_standard625_tapered.pdf";
+system, "rm -f ring_standard625_tapered.ps";
+
+EMIT, DELTAP=0.0;
+WRITE, TABLE=emit, FILE="emittab_standard625.tfs";
+WRITE, TABLE=emitsumm, FILE="emitsums_standard625.tfs";
