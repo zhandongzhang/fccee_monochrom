@@ -4,23 +4,23 @@ import xdeps as xd
 
 from cpymad.madx import Madx
 
-fname = 'ring_monochromv2'
+fname = 'ring_monochrom'
 pc_gev = 62.5
 
 mad = Madx()
-mad.call('/Users/zhang/Workspaces/monochromatization/xsuite/fcc_v22_z/seq/' + fname + '.seq')
+mad.call(fname + '.seq')
 mad.beam(particle='positron', pc=pc_gev)
-mad.use('monolattice_vertical')
+mad.use('monolattice')
 
-mad.call('install_wigglers.madx')
+mad.call('install_wigglers_monochrom.madx')
 mad.input("exec, define_wigglers_as_multipoles()")
 mad.input("exec, install_wigglers()")
-mad.use('monolattice_vertical')
+mad.use('monolattice')
 
-line_thick = xt.Line.from_madx_sequence(mad.sequence.monolattice_vertical, allow_thick=True,
+line_thick = xt.Line.from_madx_sequence(mad.sequence.monolattice, allow_thick=True,
                                   deferred_expressions=True)
 line_thick.particle_ref = xt.Particles(mass0=xt.ELECTRON_MASS_EV,
-                                 gamma0=mad.sequence.monolattice_vertical.beam.gamma)
+                                 gamma0=mad.sequence.monolattice.beam.gamma)
 line_thick.build_tracker()
 tw_thick_no_rad = line_thick.twiss(method='4d')
 
@@ -90,10 +90,10 @@ opt2 = line.match(
     method='4d',
     start='ip.1', end='ip.8',
     init='periodic',
-    vary=xt.VaryList(['ktskw1l','ktskw1r','k1qrfr1','k1qrfr2','k1qrfr3','k1qrfr4','k1qrdr1','k1qrdr2','k1qrdr3','k1qrdr4','k1qrdr5','k1qi2','k1qi3','k1qi4','k1qi5','k1qi6','k1qi7','k1qi8','k1qi9','k1qia','k1qu8','k1qu7','k1qu4','k1qu3','k1qu2','k1qu1',], step=1e-8,
+    vary=xt.VaryList(['k1qrfr1','k1qrfr2','k1qrfr3','k1qrfr4','k1qrdr1','k1qrdr2','k1qrdr3','k1qrdr4','k1qrdr5','k1qi2','k1qi3','k1qi4','k1qi5','k1qi6','k1qi7','k1qi8','k1qi9','k1qia','k1qu8','k1qu7','k1qu4','k1qu3','k1qu2','k1qu1',], step=1e-8,
     ),
     targets=[
-        xt.TargetSet(at='ip.8', betx=0.1, bety=0.0008, alfx=0, alfy=0, dx=0, dpx=0, dy=0.002, dpy=0, mux=tw_thick_no_rad.qx, muy=tw_thick_no_rad.qy, tol=1e-5), xt.TargetSet(at='frf.1', alfx=0, alfy=0, tol=1e-5)
+        xt.TargetSet(at='ip.8', betx=0.09, bety=0.001, alfx=0, alfy=0, dx=0.105, dpx=0, mux=tw_thick_no_rad.qx, muy=tw_thick_no_rad.qy, tol=1e-5), xt.TargetSet(at='frf.1', alfx=0, alfy=0, tol=1e-5)
     ]
 )
 opt2.solve()
@@ -127,4 +127,3 @@ tw_thin_no_rad.rows['ip.*'].cols['betx alfx bety alfy dx dpx dy dpy'].show()
 
 line.to_json(fname + '_thin.json')
 line_thick.to_json(fname + '_thick.json')
-
