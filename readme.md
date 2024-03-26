@@ -8,6 +8,6 @@ This repository "fccee_monochrom" summaries the FCCee monochromatization optics 
 2. **Xsuite version**: The designed FCCee monochromatization lattices in MADX are transfered to Xsuite version for further performance check. The beam parameters at all the eight straight sections are rematched after transfered to the thin Xsuite .json file.
 
 #### References:
-Z. Zhang, IJCLab/IHEP, *zzhang@ijclab.in2p3.fr*
+* Z. Zhang, IJCLab/IHEP, *zzhang@ijclab.in2p3.fr*
 
-A. Faus-Golfe, IJCLab, *fausgolf@ijclab.in2p3.fr*
+* A. Faus-Golfe, IJCLab, *fausgolf@ijclab.in2p3.fr*

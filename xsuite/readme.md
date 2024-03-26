@@ -36,6 +36,6 @@ pip install pyheadtail
 
 xsuite-prebuild
 
-*The manual of Xsuite see at https://xsuite.readthedocs.io/en/latest/ .*
+* *The manual of Xsuite see at https://xsuite.readthedocs.io/en/latest/ .*
 
-*The example of Xsuite see at https://github.com/xsuite/ .*
+* *The example of Xsuite see at https://github.com/xsuite/ .*
