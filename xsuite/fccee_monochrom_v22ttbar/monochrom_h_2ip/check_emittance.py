@@ -9,7 +9,7 @@ line.build_tracker()
 tw_no_rad = line.twiss(method='4d')
 
 line.vars['voltca1'] = 2.1
-line.vars['lagca1'] = 0.34232908082677338
+line.vars['lagca1'] = 0.34232908082677332
 
 line.configure_radiation(model='mean')
 line.compensate_radiation_energy_loss()
