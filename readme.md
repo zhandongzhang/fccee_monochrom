@@ -1,6 +1,6 @@
-This repository "fccee_monochrom" summaries the FCCee monochromatization optics design* result base on Oide san's FCCee V22 lattice, downloaded from https://gitlab.cern.ch/acc-models/fcc/fcc-ee-lattice/-/tree/V22/lattices/
+This repository "fccee_monochrom" summaries the FCCee monochromatization optics design@ result base on Oide san's FCCee V22 lattice, downloaded from https://gitlab.cern.ch/acc-models/fcc/fcc-ee-lattice/-/tree/V22/lattices/
 
-* This project '*Optics Design of a Transverse Monochromatic Scheme for the Direct s-channel Higgs Production at FCC-ee*' is suported by China Scholarship Council (CSC) and supervised by Dr. A. Faus-Golfe.
+@This project '*Optics Design of a Transverse Monochromatic Scheme for the Direct s-channel Higgs Production at FCC-ee*' is suported by China Scholarship Council (CSC) and supervised by Dr. A. Faus-Golfe.
 
 #### The two versions:
 1. **MADX version**: The code MADX is what we used to design the FCCee monochromatization optics.
