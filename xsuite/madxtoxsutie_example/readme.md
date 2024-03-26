@@ -6,6 +6,6 @@ The example use the MADX sequence file of FCCee monochromatization optics design
 
 conda activate xsuite
 
-**Run the 'build_xsuite_model.py'**
+**Run the file 'build_xsuite_model.py'**
 
 python build_xsuite_model.py
