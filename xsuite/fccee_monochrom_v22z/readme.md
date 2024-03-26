@@ -11,3 +11,10 @@ This folder "FCCee_monochrom_v22z" contains the FCCee monochromatization optics 
 6. **monochrom_mix**: monochromatization lattice with 0.105 m horizontal dispersion and 0.001 m vertical dispersion at all IPs.
 
 *Each folder contains the thick json file and thin json file (transfered from MADX sequence file) of the corresponding lattice and a simple file to test the performance in Xsuite.*
+
+#### Content of output file:
+
+1. **twiss_no_rad.csv**: twiss result in 4D mode without tapering.
+2. **twiss_rad_wig_off.csv**: twiss result with tapering.
+3. **twiss_rad_wig_off.png**: twiss plot with tapering.
+4. **performance.txt**: performance parameter list for further calcualtion.

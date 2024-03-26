@@ -6,13 +6,17 @@ line = xt.Line.from_json('ring_monochrom_thin.json')
 
 line.build_tracker()
 
-tw_no_rad = line.twiss(method='4d')
+tw_no_rad = line.twiss(method='4d').to_pandas()
+tw_no_rad.to_csv('twiss_no_rad.csv')
 
 line.vars['voltca1'] = 2.1
 line.vars['lagca1'] = 0.33711679011619888
 
 line.configure_radiation(model='mean')
 line.compensate_radiation_energy_loss()
+
+tw_rad_wig_off = line.twiss(eneloss_and_damping=True).to_pandas()
+tw_rad_wig_off.to_csv('twiss_rad_wig_off.csv')
 
 tw_rad_wig_off = line.twiss(eneloss_and_damping=True)
 
@@ -29,22 +33,27 @@ sige = sigma_z*2*np.pi*qs/alfa/tw_rad_wig_off.circumference
 print('\n Beam parameters at the IPs:')
 tw_rad_wig_off.rows['ip.*'].cols['betx alfx bety alfy dx dpx dy dpy'].show()
 
-print('\n Emittance:')
-print('Ex:', ex)
-print('Ey:', ey)
-print('Ez:', ez)
-print('\n Energy loss per turn:')
-print(eloss_turn)
-print('\n Momentum compaction factor :')
-print(alfa)
-print('\n Energy spread:')
-print(sige)
-print('\n Bunch length:')
-print(sigma_z)
-print('\n Sychrotron tune:')
-print(qs)
-print('\n Longitudinal damping time:')
-print(damping_time)
+with open('performance.txt', 'w') as f:
+    f.write('Performance parameters check:')
+    f.write('\n @ Emittance:')
+    f.write('\nEx: ')
+    f.write(str(ex))
+    f.write('\nEy: ')
+    f.write(str(ey))
+    f.write('\nEz: ')
+    f.write(str(ez))
+    f.write('\n @ Energy loss per turn:\n')
+    f.write(str(eloss_turn))
+    f.write('\n @ Momentum compaction factor:\n')
+    f.write(str(alfa))
+    f.write('\n @ Energy spread:\n')
+    f.write(str(sige))
+    f.write('\n @ Bunch length:\n')
+    f.write(str(sigma_z))
+    f.write('\n @ Sychrotron tune:\n')
+    f.write(str(qs))
+    f.write('\n @ Longitudinal damping time:\n')
+    f.write(str(damping_time))
 
 fig1 = plt.figure(1, figsize=(6.4, 4.8*1.5))
 spbet = plt.subplot(3,1,1)
@@ -74,4 +83,4 @@ fig1.suptitle(
 )
 
 fig1.subplots_adjust(left=.15, right=.92, hspace=.27)
-plt.show()
+plt.savefig('twiss_rad_wig_off.png')
