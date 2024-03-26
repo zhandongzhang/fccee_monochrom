@@ -34,6 +34,8 @@ pip install sixtracktools
 pip install pyheadtail
 
 
-The manual of Xsuite see at https://xsuite.readthedocs.io/en/latest/installation.html.
 
-The example of Xsuite see at https://github.com/xsuite/.
+
+*The manual of Xsuite see at https://xsuite.readthedocs.io/en/latest/installation.html.
+
+*The example of Xsuite see at https://github.com/xsuite/.*
