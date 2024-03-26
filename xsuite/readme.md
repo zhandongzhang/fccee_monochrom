@@ -1,10 +1,10 @@
 #### Xsuite Installation for Linux, MacOS or Windows:
 
-1. **Conda installation(recommended):** 
+1. **Conda installation (recommended):** 
 
 Install conda from miniconda website https://docs.conda.io/projects/miniconda/en/latest/ or install from 'homebrew' if you are using MacOS.
 
-2. **Create a build environment(recommended):**
+2. **Create a build environment (recommended):**
 
 conda init
 
@@ -12,7 +12,7 @@ conda create -n xsuite
 
 conda activate xsuite
 
-3. **Install cython(recommended):**
+3. **Install cython (recommended):**
 
 conda install python=3.11 wheel cython
 
