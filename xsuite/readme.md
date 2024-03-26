@@ -35,6 +35,6 @@ pip install pyheadtail
 8. **Kernels pre-build for Xsuite (do only once after the Xsuite installation):**
 xsuite-prebuild
 
-*The manual of Xsuite see at https://xsuite.readthedocs.io/en/latest/installation.html.*
+*The manual of Xsuite see at https://xsuite.readthedocs.io/en/latest/ .*
 
-*The example of Xsuite see at https://github.com/xsuite/.*
+*The example of Xsuite see at https://github.com/xsuite/ .*
