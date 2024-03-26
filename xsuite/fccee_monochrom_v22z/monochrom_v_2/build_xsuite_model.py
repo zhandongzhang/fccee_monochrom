@@ -8,7 +8,7 @@ fname = 'ring_monochromv2'
 pc_gev = 62.5
 
 mad = Madx()
-mad.call('/Users/zhang/Workspaces/monochromatization/xsuite/fcc_v22_t/seq/' + fname + '.seq')
+mad.call('/Users/zhang/Workspaces/monochromatization/xsuite/fcc_v22_z/seq/' + fname + '.seq')
 mad.beam(particle='positron', pc=pc_gev)
 mad.use('monolattice_vertical')
 
@@ -90,10 +90,10 @@ opt2 = line.match(
     method='4d',
     start='ip.1', end='ip.8',
     init='periodic',
-    vary=xt.VaryList(['ktskw1l','ktskw1r','k1qrfr1','k1qrfr2','k1qrfr3','k1qrfr4','k1qrfr5','k1qrdr1','k1qrdr2','k1qrdr3','k1qrdr4','k1qrdr5','k1qi2','k1qi3','k1qi4','k1qi5','k1qi6','k1qi7','k1qi8','k1qi9','k1qia','k1qu8','k1qu7','k1qu4','k1qu3','k1qu2','k1qu1',], step=1e-8,
+    vary=xt.VaryList(['ktskw1l','ktskw1r','k1qrfr1','k1qrfr2','k1qrfr3','k1qrfr4','k1qrdr1','k1qrdr2','k1qrdr3','k1qrdr4','k1qrdr5','k1qi2','k1qi3','k1qi4','k1qi5','k1qi6','k1qi7','k1qi8','k1qi9','k1qia','k1qu8','k1qu7','k1qu4','k1qu3','k1qu2','k1qu1',], step=1e-8,
     ),
     targets=[
-        xt.TargetSet(at='ip.8', betx=1, bety=0.0016, alfx=0, alfy=0, dx=0, dpx=0, dy=0.002, dpy=0, mux=tw_thick_no_rad.qx, muy=tw_thick_no_rad.qy, tol=1e-5), xt.TargetSet(at='frf.1', alfx=0, alfy=0, tol=1e-5)
+        xt.TargetSet(at='ip.8', betx=0.1, bety=0.0008, alfx=0, alfy=0, dx=0, dpx=0, dy=0.002, dpy=0, mux=tw_thick_no_rad.qx, muy=tw_thick_no_rad.qy, tol=1e-5), xt.TargetSet(at='frf.1', alfx=0, alfy=0, tol=1e-5)
     ]
 )
 opt2.solve()
