@@ -10,7 +10,7 @@ conda activate xsuite
 3. **Install cython:**:
 conda install python=3.11 wheel cython
 
-4. **Install cpymad (see also at https://hibtc.github.io/cpymad/installation.html):**:
+4. **Install cpymad (see also at https://hibtc.github.io/cpymad/installation.html):**
 pip install cpymad --only-binary cpymad
 
 5. **Install Xsuite:**:
