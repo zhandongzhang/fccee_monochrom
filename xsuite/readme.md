@@ -12,7 +12,6 @@ conda create -n xsuite
 
 conda activate xsuite
 
-
 3. **Install cython:**
 
 conda install python=3.11 wheel cython
@@ -33,6 +32,8 @@ pip install sixtracktools
 
 pip install pyheadtail
 
+8. **Kernels pre-build for Xsuite (do only once after the Xsuite installation):**
+xsuite-prebuild
 
 *The manual of Xsuite see at https://xsuite.readthedocs.io/en/latest/installation.html.*
 
