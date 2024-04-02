@@ -1,0 +1,122 @@
+//Hongping Jiang
+/* new sequence for replacing the dipole BC1.1 by a half of a  chicane and a short dipole.
+And cut long dipoles（bc1.3 bc3.3 bc4.3 bc5.3 bc6.3 bc7.3)into 3 pieces and add 2 quadrupole.
+*/
+set,format="-20s","19.15f"; ! full precision
+
+Call, file="IR_down.seq";
+Call, file="IR_down_chicane.seq";
+
+pbeam :=  62.5 ;
+Ebeam := sqrt( pbeam^2 + emass^2 );
+Nbun :=   13420; NPar :=  0.559e11;
+EXbeam = 2.5E-9; EYbeam = 2E-12;
+HalfCrossingAngle = 0.015;
+
+BEAM, PARTICLE=POSITRON, NPART=Npar, KBUNCH=Nbun, ENERGY=Ebeam, RADIATE=FALSE, BV=+1, EX=EXbeam, EY=EYbeam;
+
+use, sequence = IR_down;
+
+bc1p1.1: bc1p1;
+bc1p2.1: bc1p2;
+bc1p3.1: bc1p3;
+qadd1.1:qadd1;
+qadd2.1:qadd2;
+bc3p1.1:bc3p1;
+bc3p2.1:bc3p2;
+bc3p3.1:bc3p3;
+qadd3.1:qadd3;
+qadd4.1:qadd4;
+bc4p1.1:bc4p1;
+bc4p2.1:bc4p2;
+bc4p3.1:bc4p3;
+qadd5.1:qadd5;
+qadd6.1:qadd6;
+bc5p1.1:bc5p1;
+bc5p2.1:bc5p2;
+bc5p3.1:bc5p3;
+qadd7.1:qadd7;
+qadd8.1:qadd8;
+bc6p1.1:bc6p1;
+bc6p2.1:bc6p2;
+bc6p3.1:bc6p3;
+qadd9.1:qadd9;
+qadd10.1:qadd10;
+bc7p1.1:bc7p1;
+bc7p2.1:bc7p2;
+bc7p3.1:bc7p3;
+qadd11.1:qadd11;
+qadd12.1:qadd12;
+
+seqedit, sequence =ir_down;
+
+// remove the bc1.3 and install 5 elements.
+// info of bc1.3 at the sequence bc1.3: bc1,at = 44.550043009898218;
+//the beginning of the location of the bc1.3 at_bc1.3= 44.550043009898218-lbc1/2;
+at_bc1.3= 44.550043009898218-lbc1/2;
+
+remove,  element = bc1.3;
+install, element = bc1p1.1, at = at_bc1.3+lbc1p1/2;
+install, element = qadd1.1, at = at_bc1.3 + lbc1p1 + ldrift + lqadd1/2;
+install, element = bc1p2.1, at = at_bc1.3 + lbc1p1 + lqadd1 + 2*ldrift + lbc1p2/2;
+install, element = qadd2.1, at = at_bc1.3 + lbc1p1 + lqadd1+ 3*ldrift + lbc1p2+lqadd2/2;
+install, element = bc1p3.1, at = at_bc1.3 + lbc1p1 +lqadd1+ lbc1p2+ lqadd2+ 4*ldrift+ lbc1p3/2;
+
+// remove the bc3.3 and install 5 elements.
+// info of bc3.3 at the sequence bc3.3: bc3, at = 93.978749352150771;;
+at_bc3.3 = 93.978749352150771 - lbc3/2;
+
+remove, element = bc3.3;
+install, element = bc3p1.1, at = at_bc3.3+lbc3p1/2;
+install, element = qadd3.1, at = at_bc3.3+lbc3p1+ldrift+lqadd3/2;
+install, element = bc3p2.1, at = at_bc3.3+lbc3p1+ldrift+lqadd3+ldrift+lbc3p2/2;
+install, element = qadd4.1, at = at_bc3.3+lbc3p1+ldrift+lqadd3+ldrift+lbc3p2+ldrift+lqadd4/2;
+install, element = bc3p3.1, at = at_bc3.3+lbc3p1+ldrift+lqadd3+ldrift+lbc3p2+ldrift+lqadd4+ldrift+lbc3p3/2;
+
+// remove the bc4.3 and install 5 elements.
+// info of bc4.3 at the sequence bc4.3: bc4, at = 133.46848830492672;
+at_bc4.3 = 133.46848830492672 - lbc4/2;
+
+remove, element = bc4.3;
+install, element = bc4p1.1, at = at_bc4.3+lbc4p1/2;
+install, element = qadd5.1, at = at_bc4.3+lbc4p1+ldrift+lqadd5/2;
+install, element = bc4p2.1, at = at_bc4.3+lbc4p1+ldrift+lqadd5+ldrift+lbc4p2/2;
+install, element = qadd6.1, at = at_bc4.3+lbc4p1+ldrift+lqadd5+ldrift+lbc4p2+ldrift+lqadd6/2;
+install, element = bc4p3.1, at = at_bc4.3+lbc4p1+ldrift+lqadd5+ldrift+lbc4p2+ldrift+lqadd6+ldrift+lbc4p3/2;
+
+// remove the bc5.3 and install 5 elements.
+// info of bc5.3 at the sequence bc5.3: bc5, at = 173.75507254980766;
+at_bc5.3 = 173.75507254980766 - lbc5/2;
+
+remove, element = bc5.3;
+install, element = bc5p1.1, at = at_bc5.3+lbc5p1/2;
+install, element = qadd7.1, at = at_bc5.3+lbc5p1+ldrift+lqadd7/2;
+install, element = bc5p2.1, at = at_bc5.3+lbc5p1+ldrift+lqadd7+ldrift+lbc5p2/2;
+install, element = qadd8.1, at = at_bc5.3+lbc5p1+ldrift+lqadd7+ldrift+lbc5p2+ldrift+lqadd8/2;
+install, element = bc5p3.1, at = at_bc5.3+lbc5p1+ldrift+lqadd7+ldrift+lbc5p2+ldrift+lqadd8+ldrift+lbc5p3/2;
+
+// remove the bc6.3 and install 5 elements.
+// info of bc6.3 at the sequence bc6.3: bc6, at = 220.30627988106426;
+at_bc6.3 = 220.30627988106426 - lbc6/2;
+
+remove, element = bc6.3;
+install, element = bc6p1.1, at = at_bc6.3+lbc6p1/2;
+install, element = qadd9.1, at = at_bc6.3+lbc6p1+ldrift+lqadd9/2;
+install, element = bc6p2.1, at = at_bc6.3+lbc6p1+ldrift+lqadd9+ldrift+lbc6p2/2;
+install, element = qadd10.1, at = at_bc6.3+lbc6p1+ldrift+lqadd9+ldrift+lbc6p2+ldrift+lqadd10/2;
+install, element = bc6p3.1, at = at_bc6.3+lbc6p1+ldrift+lqadd9+ldrift+lbc6p2+ldrift+lqadd10+ldrift+lbc6p3/2;
+
+// remove the bc7.3 and install 5 elements.
+// info of bc7.3 at the sequence  bc7.3: bc7, at = 260.5928641259452;
+at_bc7.3 = 260.5928641259452 - lbc7/2;
+
+remove, element = bc7.3;
+install, element = bc7p1.1, at = at_bc7.3+lbc7p1/2;
+install, element = qadd11.1, at = at_bc7.3+lbc7p1+ldrift+lqadd11/2;
+install, element = bc7p2.1, at = at_bc7.3+lbc7p1+ldrift+lqadd11+ldrift+lbc7p2/2;
+install, element = qadd12.1, at = at_bc7.3+lbc7p1+ldrift+lqadd11+ldrift+lbc7p2+ldrift+lqadd12/2;
+install, element = bc7p3.1, at = at_bc7.3+lbc7p1+ldrift+lqadd11+ldrift+lbc7p2+ldrift+lqadd12+ldrift+lbc7p3/2;
+
+endedit;
+
+save, sequence=IR_down, file="IR_monochrom_down.seq", newname = IR_monochrom_down;

@@ -1,0 +1,127 @@
+// Cut the long dipoles bc1l bc2l bc3l bc4l bc5l bwl into 3 pieces 
+//the idea is about setting the new 3-dipole working like the down optics
+//Hongping Jiang 
+set,format="-20s","23.17g"; ! full precision
+
+Call, file="IR_up_reversed.seq";
+Call, file="IR_up_chicane.seq";
+
+pbeam :=  62.5 ;
+Ebeam := sqrt( pbeam^2 + emass^2 );
+Nbun :=   13420; NPar :=  0.559e11;
+EXbeam = 2.5E-9; EYbeam = 2E-12;
+HalfCrossingAngle = 0.015;
+
+BEAM, PARTICLE=POSITRON, NPART=Npar, KBUNCH=Nbun, ENERGY=Ebeam, RADIATE=FALSE, BV=+1, EX=EXbeam, EY=EYbeam;
+
+use, sequence = IR_up_reversed;
+bc1lp1.m.g: bc1lp1;
+bc1lp2.m.g: bc1lp2;
+bc1lp3.m.g: bc1lp3;
+
+bc2lp1.m.g: bc2lp1;
+bc2lp2.m.g: bc2lp2;
+bc2lp3.m.g: bc2lp3;
+
+bc3lp1.m.g: bc3lp1;
+bc3lp2.m.g: bc3lp2;
+bc3lp3.m.g: bc3lp3;
+
+bc4lp1.m.g: bc4lp1;
+bc4lp2.m.g: bc4lp2;
+bc4lp3.m.g: bc4lp3;
+
+bc5lp1.m.g: bc5lp1;
+bc5lp2.m.g: bc5lp2;
+bc5lp3.m.g: bc5lp3;
+
+bwlp1.m.g: bwlp1;
+bwlp2.m.g: bwlp2;
+bwlp3.m.g: bwlp3;
+
+qadd1.m.g: qadd1;
+qadd2.m.g: qadd2;
+
+qadd3.m.g: qadd3;
+qadd4.m.g: qadd4;
+
+qadd5.m.g: qadd5;
+qadd6.m.g: qadd6;
+
+qadd7.m.g: qadd7;
+qadd8.m.g: qadd8;
+
+qadd9.m.g: qadd9;
+qadd10.m.g: qadd10;
+
+qadd11.m.g: qadd11;
+qadd12.m.g: qadd12;
+
+// remove the bc1l.2 and install 4 new dipoles.
+// info of bc1l.2: bc1l, at = 903.49930005615897-613.57382803371002;
+//the beginning of the location of the bc1l.2 at_bc1l.2= 903.49930005615897-613.57382803371002-lbc1l/2; 
+at_bc1l.m.g = 903.49930005615897-613.57382803371002-lbc1l/2; 
+// info of bc2l.2: bc2l, at = 903.49930005615897-373.03337685243605;
+at_bc2l.m.g = 903.49930005615897-373.03337685243605-lbc2l/2;
+// info of bc3l.2: bc3l, at = 903.49930005615897-310.36264839670912;
+at_bc3l.m.g = 903.49930005615897-310.36264839670912-lbc3l/2;
+// info of bc4l.2: bc4l, at = 903.49930005615897-253.52042391155555;
+at_bc4l.m.g = 903.49930005615897-253.52042391155555-lbc4l/2;
+// info of bc5l.2: bc5l, at = 903.49930005615897-190.84969545582862;
+at_bc5l.m.g =903.49930005615897-190.84969545582862-lbc5l/2;
+//info of bwl.2bwl.2: bwl, at = 903.49930005615897-702.58383524650708;
+at_bwl.m.g = 903.49930005615897-702.58383524650708-lbwl/2;
+
+
+seqedit, sequence = IR_up_reversed;
+//remove bwl.2
+remove,  element = bwl.2;
+install, element = bwlp1.m.g, at = at_bwl.m.g+lbwlp1/2;
+install, element = qadd1.m.g, at = at_bwl.m.g + lbwlp1 + ldrift + lqadd1/2;
+install, element = bwlp2.m.g, at = at_bwl.m.g + lbwlp1 + ldrift + lqadd1 + ldrift + lbwlp2/2;
+install, element = qadd2.m.g, at = at_bwl.m.g + lbwlp1 + ldrift + lqadd1 + ldrift + lbwlp2 + ldrift + lqadd2/2;
+install, element = bwlp3.m.g, at = at_bwl.m.g + lbwlp1 + ldrift + lqadd1 + ldrift + lbwlp2 + ldrift + lqadd2 + ldrift + lbwlp3/2;
+
+//remove bc1l.2
+remove,  element = bc1l.2;
+install, element = bc1lp1.m.g, at = at_bc1l.m.g+lbc1lp1/2;
+install, element = qadd3.m.g, at = at_bc1l.m.g + lbc1lp1 + ldrift + lqadd3/2;
+install, element = bc1lp2.m.g, at = at_bc1l.m.g + lbc1lp1 + ldrift + lqadd3 + ldrift + lbc1lp2/2;
+install, element = qadd4.m.g,  at = at_bc1l.m.g + lbc1lp1 + ldrift + lqadd3 + ldrift + lbc1lp2 + ldrift + lqadd4/2;
+install, element = bc1lp3.m.g, at = at_bc1l.m.g + lbc1lp1 + ldrift + lqadd3 + ldrift + lbc1lp2 + ldrift + lqadd4 + ldrift + lbc1lp3/2;
+
+//remove bc2l.2
+remove,  element = bc2l.2;
+install, element = bc2lp1.m.g, at = at_bc2l.m.g+lbc2lp1/2;
+install, element = qadd5.m.g, at = at_bc2l.m.g + lbc2lp1 + ldrift + lqadd5/2;
+install, element = bc2lp2.m.g, at = at_bc2l.m.g + lbc2lp1 + ldrift + lqadd5 + ldrift + lbc2lp2/2;
+install, element = qadd6.m.g, at = at_bc2l.m.g + lbc2lp1 + ldrift + lqadd5 + ldrift + lbc2lp2 + ldrift + lqadd6/2;
+install, element = bc2lp3.m.g, at = at_bc2l.m.g + lbc2lp1 + ldrift + lqadd5 + ldrift + lbc2lp2 + ldrift + lqadd6 + ldrift + lbc2lp3/2;
+
+//remove bc3l.2
+remove,  element = bc3l.2;
+install, element = bc3lp1.m.g, at = at_bc3l.m.g+lbc3lp1/2;
+install, element = qadd7.m.g, at = at_bc3l.m.g + lbc3lp1 + ldrift + lqadd7/2;
+install, element = bc3lp2.m.g, at = at_bc3l.m.g + lbc3lp1 + ldrift + lqadd7 + ldrift + lbc3lp2/2;
+install, element = qadd8.m.g, at = at_bc3l.m.g + lbc3lp1 + ldrift + lqadd7 + ldrift + lbc3lp2 + ldrift + lqadd8/2;
+install, element = bc3lp3.m.g, at = at_bc3l.m.g + lbc3lp1 + ldrift + lqadd7 + ldrift + lbc3lp2 + ldrift + lqadd8 + ldrift + lbc3lp3/2;
+
+//remove bc4l.2
+remove,  element = bc4l.2;
+install, element = bc4lp1.m.g, at = at_bc4l.m.g+lbc4lp1/2;
+install, element = qadd9.m.g, at = at_bc4l.m.g + lbc4lp1 + ldrift + lqadd9/2;
+install, element = bc4lp2.m.g, at = at_bc4l.m.g + lbc4lp1 + ldrift + lqadd9 + ldrift + lbc4lp2/2;
+install, element = qadd10.m.g, at = at_bc4l.m.g + lbc4lp1 + ldrift + lqadd9 + ldrift + lbc4lp2 + ldrift + lqadd10/2;
+install, element = bc4lp3.m.g, at = at_bc4l.m.g + lbc4lp1 + ldrift + lqadd9 + ldrift + lbc4lp2 + ldrift + lqadd10 + ldrift + lbc4lp3/2;
+
+//remove bc5l.2
+remove,  element = bc5l.2;
+install, element = bc5lp1.m.g, at = at_bc5l.m.g+lbc5lp1/2;
+install, element = qadd11.m.g, at = at_bc5l.m.g + lbc5lp1 + ldrift + lqadd11/2;
+install, element = bc5lp2.m.g, at = at_bc5l.m.g + lbc5lp1 + ldrift + lqadd11 + ldrift + lbc5lp2/2;
+install, element = qadd12.m.g, at = at_bc5l.m.g + lbc5lp1 + ldrift + lqadd11 + ldrift + lbc5lp2 + ldrift + lqadd12/2;
+install, element = bc5lp3.m.g, at = at_bc5l.m.g + lbc5lp1 + ldrift + lqadd11 + ldrift + lbc5lp2 + ldrift + lqadd12 + ldrift + lbc5lp3/2;
+
+endedit;
+
+save, sequence=IR_up_reversed, file="IR_monochrom_up_reversed.seq", newname = IR_monochrom_up_reversed;

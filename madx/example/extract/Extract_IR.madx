@@ -1,0 +1,99 @@
+/*
+This is used to extract the IR sequence from the v22.2 z mode 45.6GeV lattice.
+And save the total IR sequence named IR_total, the upstream(the lattice before ip) and the downstream (the lattice after ip) sequence, IR_up, IR_down;
+And save the beam parameters at then entrance, exit and the IP.
+And calculate the twiss of IR_up and IR_down, the survey of the IR_down.
+*/
+
+set,format="-20s","23.17g"; ! full precision
+option, -echo, -info, -warn;
+title,"FCC_ee_s_IR";
+
+// Variables of beam for standard z mode
+pbeam :=  45.6 ;
+Ebeam := sqrt( pbeam^2 + emass^2 );
+Nbun :=   10000; NPar :=  2.43e11;
+EXbeam = 0.71E-9; EYbeam = 1.42E-12;
+HalfCrossingAngle := 0.015; 
+
+// beam parameters
+BEAM,
+  PARTICLE = POSITRON, 
+  NPART = Npar, 
+  KBUNCH = Nbun, 
+  ENERGY = Ebeam, 
+  RADIATE = false,
+  EX=EXbeam,
+  EY=EYbeam, 
+  BV = +1;
+  
+CALL, FILE = "fccee_z.seq";
+
+USE, SEQUENCE = FCCEE_P_RING; 
+
+VOLTCA1=0; ! Switch off the cavities
+
+SAVEBETA, LABEL = StartIP1, PLACE = ip.5; 
+SAVEBETA, LABEL = EN, PLACE = FF1.2;   
+SAVEBETA, LABEL = EX, PLACE =FG.5; 
+
+// initial closed twiss
+Twiss;
+show, EX;
+show, EN;
+show, StartIP1;
+
+// extract IR
+USE, SEQUENCE = FCCEE_P_RING; 
+
+seqedit, sequence=FCCEE_P_RING;
+FLATTEN;
+cycle, start=ip.1;
+extract, sequence =FCCEE_P_RING, from = FF1.2, TO = FG.5, newname=IR_total;
+extract, sequence =FCCEE_P_RING, from = IP.5,  TO = FG.5, newname=IR_down;
+extract, sequence =FCCEE_P_RING, from = FF1.2, To = IP.5, newname=IR_up;
+
+save, sequence=IR_total, file="IR_total.seq";
+save, sequence=IR_down, file="IR_down.seq";
+save, sequence=IR_up, file="IR_up.seq";
+endedit;
+
+// Twiss of IR
+use, sequence = IR_total;
+Twiss,
+BETA0 = EN,
+SEQUENCE = IR_total, 
+ RMATRIX, 
+ CHROM,
+ file = 'IR_total.tfs';
+plot, haxis=s, hmin=0, hmax=1350, vaxis1=betx,bety, vaxis2=dx, vmin=0,-1, vmax=10000,0.6, title="Standard IR Optics", colour=100, range= #s/#e, NOVERSION=true, file="IR";
+
+use, sequence = IR_down;
+Twiss,
+BETA0=StartIP1,
+SEQUENCE = IR_down, 
+  RMATRIX, 
+  CHROM,
+  file = 'IR_downstream.tfs';
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx, title="Standard IR Downstream Optics", colour=100, range= #s/#e, NOVERSION=true, file="IR";
+
+use, sequence = IR_up;
+Twiss,
+BETA0 = EN,
+SEQUENCE = IR_up, 
+  RMATRIX, 
+  CHROM,
+  file = 'IR_upstream.tfs';
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx, title="Standard IR Upstream Optics", colour=100, range= #s/#e, NOVERSION=true, file="IR";
+
+// Print the plot as pdf
+system, "ps2pdf IR.ps IR.pdf";
+system, "rm -f IR.ps";
+
+// Survey of IR_total
+use, sequence = IR_total;
+survey,
+TABLE = survey, 
+THETA0 = HalfCrossingAngle, 
+file='IR_total.survey';
+exit;

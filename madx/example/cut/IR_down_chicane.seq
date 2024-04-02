@@ -1,0 +1,129 @@
+/*
+cut the long dipole into 3 pieces the middle one has the same angle with the long dipole. the other two
+have opposite angles.
+sequence information.
+sequence: bc1P1+ drift+ qadd1 +drift +bc1P2 + drift+ qadd2+ drift +bc1P3
+(initial the length of drift is 0.3meter.)
+lbc1P1+drift+lqadd1+drift+lbc1P2+drift+lqadd2+drift+lbc1P3=lbc1;
+ */
+// values of the new elements. the initial dipoles are the same.
+// lqadd1 is short for the Length of Quadrupole ADD Number 1. (LQADD1)
+lqadd := 1;
+lqadd1:= lqadd;
+lqadd2:= lqadd;
+lqadd3:= lqadd;
+lqadd4:= lqadd;
+lqadd5:= lqadd;
+lqadd6:= lqadd;
+lqadd7:= lqadd;
+lqadd8:= lqadd;
+lqadd9:= lqadd;
+lqadd10:= lqadd;
+lqadd11:= lqadd;
+lqadd12:= lqadd;
+//ldrift is short for Length of the DRIFT.
+ldrift:=0.3;
+chicane1:=0;
+chicane3:=0;
+chicane4:=0;
+chicane5:=0;
+chicane6:=0;
+chicane7:=0;
+anglebc1p1:= chicane1;
+anglebc1p2:= anglebc1;
+anglebc1p3:=-chicane1;
+anglebc3p1:= chicane3;
+anglebc3p2:= anglebc3;
+anglebc3p3:=-chicane3;
+anglebc4p1:= chicane4;
+anglebc4p2:= anglebc4;
+anglebc4p3:=-chicane4;
+anglebc5p1:= chicane5;
+anglebc5p2:= anglebc5;
+anglebc5p3:=-chicane5;
+anglebc6p1:= chicane6;
+anglebc6p2:= anglebc6;
+anglebc6p3:=-chicane6;
+anglebc7p1:= chicane7;
+anglebc7p2:= anglebc7;
+anglebc7p3:=-chicane7;
+
+// the initial of the strength of added Quadrupoles(k1qadd1) are zero.
+// lbc1P1 is short for the Length of the BC1 Part1(LBC1P1).
+k1qadd1:= 0.0;
+k1qadd2:= 0.0;
+k1qadd3:= 0.0;
+k1qadd4:= 0.0;
+k1qadd5:= 0.0;
+k1qadd6:= 0.0;
+k1qadd7:= 0.0;
+k1qadd8:= 0.0;
+k1qadd9:= 0.0;
+k1qadd10:= 0.0;
+k1qadd11:= 0.0;
+k1qadd12:= 0.0;
+
+// all the 3 parts dipoles have the same length.
+lbc1P1:=(lbc1-lqadd1-lqadd2-4*ldrift)/3;
+lbc1P2:=lbc1p1;
+lbc1P3:=lbc1p1;
+lbc3p1:=(lbc3-lqadd3-lqadd4-4*ldrift)/3;
+lbc3p2:=lbc3p1;
+lbc3p3:=lbc3p1;
+lbc4p1:=(lbc4-lqadd5-lqadd6-4*ldrift)/3;
+lbc4p2:=lbc4p1;
+lbc4p3:=lbc4p1;
+lbc5p1:=(lbc5-lqadd7-lqadd8-4*ldrift)/3;
+lbc5p2:=lbc5p1;
+lbc5p3:=lbc5p1;
+lbc6p1:=(lbc6-lqadd9-lqadd10-4*ldrift)/3;
+lbc6p2:=lbc6p1;
+lbc6p3:=lbc6p1;
+lbc7p1:=(lbc7-lqadd11-lqadd12-4*ldrift)/3;
+lbc7p2:=lbc7p1;
+lbc7p3:=lbc7p1;
+
+//Define new element classes
+//new 3 dipoles for bc1.3.
+bc1p1: rbend, l:=lbc1p1, angle:=anglebc1P1, e1:= 0 * anglebc1P1, e2:= 0 * anglebc1P1;
+bc1p2: rbend, l:=lbc1p2, angle:=anglebc1p2, e1:= 0 * anglebc1P2, e2:= 0 * anglebc1P2;
+bc1p3: rbend, l:=lbc1p3, angle:=anglebc1P3, e1:= 0 * anglebc1P3, e2:= 0 * anglebc1P3;
+
+//new 3 dipoles for bc3.3
+bc3p1: rbend, l:=lbc3p1, angle:= anglebc3p1, e1:= 0 * anglebc3, e2:= 0 * anglebc3;
+bc3p2: rbend, l:=lbc3p2, angle:= anglebc3p2, e1:= 0 * anglebc3, e2:= 0 * anglebc3;
+bc3p3: rbend, l:=lbc3p3, angle:= anglebc3p3, e1:= 0 * anglebc3, e2:= 0 * anglebc3;
+
+//new 3dipoles for bc4.3
+bc4p1: rbend, l:=lbc4p1, angle:= anglebc4p1, e1:= 0 * anglebc4, e2:= 0 * anglebc4;
+bc4p2: rbend, l:=lbc4p2, angle:= anglebc4p2, e1:= 0 * anglebc4, e2:= 0 * anglebc4;
+bc4p3: rbend, l:=lbc4p3, angle:= anglebc4p3, e1:= 0 * anglebc4, e2:= 0 * anglebc4;
+
+//new 3dipoles for bc5.3
+bc5p1: rbend, l:=lbc5p1, angle:= anglebc5p1, e1:= 0 * anglebc5, e2:= 0 * anglebc5;
+bc5p2: rbend, l:=lbc5p2, angle:= anglebc5p2, e1:= 0 * anglebc5, e2:= 0 * anglebc5;
+bc5p3: rbend, l:=lbc5p3, angle:= anglebc5p3, e1:= 0 * anglebc5, e2:= 0 * anglebc5;
+
+//new 3dipoles for bc6.3
+bc6p1: rbend, l:=lbc6p1, angle:= anglebc6p1, e1:= 0 * anglebc6, e2:= 0 * anglebc6;
+bc6p2: rbend, l:=lbc6p2, angle:= anglebc6p2, e1:= 0 * anglebc6, e2:= 0 * anglebc6;
+bc6p3: rbend, l:=lbc6p3, angle:= anglebc6p3, e1:= 0 * anglebc6, e2:= 0 * anglebc6;
+
+//new 3dipoles for bc7.3
+bc7p1: rbend, l:=lbc7p1, angle:= anglebc7p1, e1:= 0 * anglebc7, e2:= 0 * anglebc7;
+bc7p2: rbend, l:=lbc7p2, angle:= anglebc7p2, e1:= 0 * anglebc7, e2:= 0 * anglebc7;
+bc7p3: rbend, l:=lbc7p3, angle:= anglebc7p3, e1:= 0 * anglebc7, e2:= 0 * anglebc7;
+
+// 2 added quadrupoles for matching dispersion and beta functions. with the initial length 1m and the strength 0 and 0 work as drifts.
+qadd1: QUADRUPOLE, K1:= k1qadd1, L:=lqadd1;
+qadd2: QUADRUPOLE, K1:= k1qadd2, L:=lqadd2;
+qadd3: QUADRUPOLE, K1:= k1qadd3, L:=lqadd3;
+qadd4: QUADRUPOLE, K1:= k1qadd4, L:=lqadd4;
+qadd5: QUADRUPOLE, K1:= k1qadd5, L:=lqadd5;
+qadd6: QUADRUPOLE, K1:= k1qadd6, L:=lqadd6;
+qadd7: QUADRUPOLE, K1:= k1qadd7, L:=lqadd7;
+qadd8: QUADRUPOLE, K1:= k1qadd8, L:=lqadd8;
+qadd9: QUADRUPOLE, K1:= k1qadd9, L:=lqadd9;
+qadd10: QUADRUPOLE, K1:= k1qadd10, L:=lqadd10;
+qadd11: QUADRUPOLE, K1:= k1qadd11, L:=lqadd11;
+qadd12: QUADRUPOLE, K1:= k1qadd12, L:=lqadd12;

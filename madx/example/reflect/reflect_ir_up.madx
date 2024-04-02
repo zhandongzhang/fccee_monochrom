@@ -1,0 +1,33 @@
+// Reflect the lattice 
+// 2023.1.17
+// Zhandong Zhang
+set,format="-20s","23.17g"; ! full precision
+
+//Variables of beam for standard z mode
+pbeam :=  45.6 ;
+Ebeam := sqrt( pbeam^2 + emass^2 );
+Nbun :=   10000; NPar :=  2.43e11;
+EXbeam = 0.71E-9; EYbeam = 1.42E-12;
+HalfCrossingAngle := 0.015; 
+
+//beam parameters
+BEAM,
+  PARTICLE = POSITRON, 
+  NPART = Npar, 
+  KBUNCH = Nbun, 
+  ENERGY = Ebeam, 
+  RADIATE = false,
+  EX=EXbeam,
+  EY=EYbeam, 
+  BV = +1;
+
+Call, file="ir_up.seq";
+
+use, sequence = ir_up;
+
+seqedit, sequence = ir_up;
+FLATTEN;
+REFLECT;
+endedit;
+
+save, sequence=ir_up, file="ir_up_reversed.seq", newname = ir_up_reversed;

@@ -1,0 +1,140 @@
+// cut the long dipole into 3 pieces
+// remove long dipoles and add the short dipoles and quadrupoles.bc5l.2\bc4l.2\bc3l.2\bc2l.2\bc1l.2\bwl.2
+
+/*
+bwl.2: bwl, at = 903.49930005615897-702.58383524650708;
+qc4l.2: qc4l, at = 903.49930005615897-649.3103029436752;
+bc1l.2: bc1l, at = 903.49930005615897-613.57382803371002;
+qc5l.2: qc5l, at = 903.49930005615897-577.83735312374483;
+qc6l.2: qc6l, at = 903.49930005615897-471.62111811844079;
+qc7l.2: qc7l, at = 903.49930005615897-407.88299306558474;
+sy1l.4: sy1l, at = 903.49930005615897-405.75799306557747;
+sy1l.3: sy1l, at = 903.49930005615897-405.60799306558329;
+bc2l.2: bc2l, at = 903.49930005615897-373.03337685243605;
+qy2l.4: qy2l, at = 903.49930005615897-338.78376063929318;
+bc3l.2: bc3l, at = 903.49930005615897-310.36264839670912;
+qy1l.2: qy1l, at = 903.49930005615897-281.94153615413234;
+bc4l.2: bc4l, at = 903.49930005615897-253.52042391155555;
+qy2l.3: qy2l, at = 903.49930005615897-225.0993116689715;
+bc5l.2: bc5l, at = 903.49930005615897-190.84969545582862;
+the info of the long dipoles.
+*/
+//cutting bc1l into 3 pieces, like down lattice part one and part3 have the opposite angles and the part2 have the same angle with original one.
+lqadd:=1;
+lqadd1:=lqadd;
+lqadd2:=lqadd;
+lqadd3:=lqadd;
+ldrift:=0.3;
+
+chicane5l := 0;
+chicane3l := (84.6704718996*chicane5l)/74.9562948644;
+
+k1qadd1:= 0.0;
+k1qadd2:= 0.0;
+k1qadd3:= 0.0;
+lqadd4:=lqadd;
+k1qadd4:= 0.0;
+lqadd5:=lqadd;
+k1qadd5:= 0.0;
+lqadd6:=lqadd;
+k1qadd6:= 0.0;
+lqadd7:=lqadd;
+k1qadd7:= 0.0;
+lqadd8:=lqadd;
+k1qadd8:= 0.0;
+lqadd9:=lqadd;
+k1qadd9:= 0.0;
+lqadd10:=lqadd;
+k1qadd10:= 0.0;
+lqadd11:=lqadd;
+k1qadd11:= 0.0;
+lqadd12:=lqadd;
+k1qadd12:= 0.0;
+
+lbc1lp1:= (lbc1l-2*lqadd1-4*ldrift)/3;
+lbc1lp2:= (lbc1l-2*lqadd1-4*ldrift)/3;
+lbc1lp3:= (lbc1l-2*lqadd1-4*ldrift)/3;
+
+lbc2lp1:= (lbc2l-2*lqadd2-4*ldrift)/3;
+lbc2lp2:= (lbc2l-2*lqadd2-4*ldrift)/3;
+lbc2lp3:= (lbc2l-2*lqadd2-4*ldrift)/3;
+
+lbc3lp1:= (lbc3l-2*lqadd3-4*ldrift)/3;
+lbc3lp2:= (lbc3l-2*lqadd3-4*ldrift)/3;
+lbc3lp3:= (lbc3l-2*lqadd3-4*ldrift)/3;
+
+lbc4lp1:= (lbc4l-2*lqadd4-4*ldrift)/3;
+lbc4lp2:= (lbc4l-2*lqadd4-4*ldrift)/3;
+lbc4lp3:= (lbc4l-2*lqadd4-4*ldrift)/3;
+
+lbc5lp1:= (lbc5l-2*lqadd5-4*ldrift)/3;
+lbc5lp2:= (lbc5l-2*lqadd5-4*ldrift)/3;
+lbc5lp3:= (lbc5l-2*lqadd5-4*ldrift)/3;
+
+
+lbwlp1:= (lbwl-2*lqadd1-4*ldrift)/3;
+lbwlp2:= (lbwl-2*lqadd1-4*ldrift)/3;
+lbwlp3:= (lbwl-2*lqadd1-4*ldrift)/3;
+
+anglebc1lp1:= anglebc1l/3;
+anglebc1lp2:= anglebc1l/3;
+anglebc1lp3:= anglebc1l/3;
+
+anglebc2lp1:= anglebc2l/3;
+anglebc2lp2:= anglebc2l/3;
+anglebc2lp3:= anglebc2l/3;
+
+anglebc3lp1:= anglebc3l/3+chicane3l;
+anglebc3lp2:= anglebc3l/3;
+anglebc3lp3:= anglebc3l/3;
+
+anglebc4lp1:= anglebc4l/3;
+anglebc4lp2:= anglebc4l/3-(chicane5l+chicane3l);
+anglebc4lp3:= anglebc4l/3;
+
+anglebc5lp1:= anglebc5l/3;
+anglebc5lp2:= anglebc5l/3;
+anglebc5lp3:= anglebc5l/3+chicane5l;
+
+anglebwlp1:= anglebwl/3;
+anglebwlp2:= anglebwl/3;
+anglebwlp3:= anglebwl/3;
+
+//new dipoles for bc1l
+bc1lp1: rbend, l:= lbc1lp1 ,angle:= anglebc1lp1,e1:=0 *anglebc1lp1,e2:=0 * anglebc1lp1;
+bc1lp2: rbend, l:= lbc1lp2 ,angle:= anglebc1lp2,e1:=0 *anglebc1lp2,e2:=0 * anglebc1lp2;
+bc1lp3: rbend, l:= lbc1lp3 ,angle:= anglebc1lp3,e1:=0 *anglebc1lp3,e2:=0 * anglebc1lp3;
+
+bc2lp1: rbend, l:= lbc2lp1 ,angle:= anglebc2lp1,e1:=0 *anglebc2lp1,e2:=0 * anglebc2lp1;
+bc2lp2: rbend, l:= lbc2lp2 ,angle:= anglebc2lp2,e1:=0 *anglebc2lp2,e2:=0 * anglebc2lp2;
+bc2lp3: rbend, l:= lbc2lp3 ,angle:= anglebc2lp3,e1:=0 *anglebc2lp3,e2:=0 * anglebc2lp3;
+
+bc3lp1: rbend, l:= lbc3lp1 ,angle:= anglebc3lp1,e1:=0 *anglebc3lp1,e2:=0 * anglebc3lp1;
+bc3lp2: rbend, l:= lbc3lp2 ,angle:= anglebc3lp2,e1:=0 *anglebc3lp2,e2:=0 * anglebc3lp2;
+bc3lp3: rbend, l:= lbc3lp3 ,angle:= anglebc3lp3,e1:=0 *anglebc3lp3,e2:=0 * anglebc3lp3;
+
+bc4lp1: rbend, l:= lbc4lp1 ,angle:= anglebc4lp1,e1:=0 *anglebc4lp1,e2:=0 * anglebc4lp1;
+bc4lp2: rbend, l:= lbc4lp2 ,angle:= anglebc4lp2,e1:=0 *anglebc4lp2,e2:=0 * anglebc4lp2;
+bc4lp3: rbend, l:= lbc4lp3 ,angle:= anglebc4lp3,e1:=0 *anglebc4lp3,e2:=0 * anglebc4lp3;
+
+bc5lp1: rbend, l:= lbc5lp1 ,angle:= anglebc5lp1,e1:=0 *anglebc5lp1,e2:=0 * anglebc5lp1;
+bc5lp2: rbend, l:= lbc5lp2 ,angle:= anglebc5lp2,e1:=0 *anglebc5lp2,e2:=0 * anglebc5lp2;
+bc5lp3: rbend, l:= lbc5lp3 ,angle:= anglebc5lp3,e1:=0 *anglebc5lp3,e2:=0 * anglebc5lp3;
+
+bwlp1: rbend, l:= lbwlp1,angle:= anglebwlp1,e1:=0 *anglebwlp1,e2:=0 * anglebwlp1;
+bwlp2: rbend, l:= lbwlp2,angle:= anglebwlp2,e1:=0 *anglebwlp2,e2:=0 * anglebwlp2;
+bwlp3: rbend, l:= lbwlp3,angle:= anglebwlp3,e1:=0 *anglebwlp3,e2:=0 * anglebwlp3;
+
+//new quadrupoles
+qadd1: QUADRUPOLE, K1:= k1qadd1, L:=lqadd1;
+qadd2: QUADRUPOLE, K1:= k1qadd2, L:=lqadd2;
+qadd3: QUADRUPOLE, K1:= k1qadd3, L:=lqadd3;
+qadd4: QUADRUPOLE, K1:= k1qadd4, L:=lqadd4;
+qadd5: QUADRUPOLE, K1:= k1qadd5, L:=lqadd5;
+qadd6: QUADRUPOLE, K1:= k1qadd6, L:=lqadd6;
+qadd7: QUADRUPOLE, K1:= k1qadd7, L:=lqadd7;
+qadd8: QUADRUPOLE, K1:= k1qadd8, L:=lqadd8;
+qadd9: QUADRUPOLE, K1:= k1qadd9, L:=lqadd9;
+qadd10: QUADRUPOLE, K1:= k1qadd10, L:=lqadd10;
+qadd11: QUADRUPOLE, K1:= k1qadd11, L:=lqadd11;
+qadd12: QUADRUPOLE, K1:= k1qadd12, L:=lqadd12;
