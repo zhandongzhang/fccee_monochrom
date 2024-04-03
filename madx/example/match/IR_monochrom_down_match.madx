@@ -1,0 +1,194 @@
+option, -echo, -info, -warn;
+set,format="-20s","23.17g"; ! full precision
+
+title,"FCC_ee_IR_monochrom_down_match";
+
+//Variables of beam
+pbeam :=  62.5 ;
+Ebeam := sqrt( pbeam^2 + emass^2 );
+Nbun :=   13420; NPar :=  0.559e11;
+EXbeam = 2.5E-9; EYbeam = 2E-12;
+k=2;
+HalfCrossingAngle := 0.015;
+
+//beam parameters
+BEAM,
+  PARTICLE = POSITRON,
+  NPART = Npar,
+  KBUNCH = Nbun,
+  ENERGY = Ebeam,
+  RADIATE = false,
+  EX=EXbeam,
+  EY=EYbeam,
+  BV = +1;
+
+// entrance beam parameters of first optics
+initial: BETA0,
+betx := 0.09,       alfx := 0,  mux := 0,           dx := 0.105,    dpx := 0,             
+bety := 0.001,       alfy := 0,  muy := 0,           dy := 0,               dpy := 0;                 
+// using the monochromatization lattice
+call, file= "ir_monochrom_down.seq";
+USE, SEQUENCE = ir_monochrom_down;
+
+k1qa1              =  -0.0090374400628455889 ;
+k1qa2              =   0.0010113801910743691 ;
+k1qa3              =   0.0077960302285366486 ;
+k1qa4              =    0.010281489667641306 ;
+k1qa5              =  -0.0096807563161144198 ;
+k1qa6              =   -0.021380988635219093 ;
+k1qadd1             =    0.018389746861774761 ;
+k1qadd2             =     -0.0106483592612287 ;
+k1qadd3             =    0.022055988514404771 ;
+k1qadd4             =    0.011442074335465544 ;
+k1qadd5             =  -0.0049326745916340974 ;
+k1qadd6             =   -0.015851642277297878 ;
+k1qadd7             =    0.017303817843105241 ;
+k1qadd8             =    0.027216998729693593 ;
+k1qadd9             =    0.008440935103614931 ;
+k1qadd10            =    0.018883893580097458 ;
+k1qadd11            =  -0.0012990330247487172 ;
+k1qadd12            =    -0.01217751296479028 ;
+k1qy1              =   -0.014945714930216365 ;
+k1qy2              =   0.0025888283152426762 ;
+k1qc2r2            =   -0.026737076201041883 ;
+k1qc2r1            =     0.23828475665829429 ;
+k1qc1r3            =   -0.019467992838658167 ;
+k1qc1r2            =    -0.25087354987146598 ;
+k1qc1l1            =    -0.31065886876859439 ;
+k1qc4              =  -0.0036065349074660084 ;
+k1qc3              =   0.0026941115729521639 ;
+k1qc5              =   -0.021674739114638422 ;
+k1qc6              =    0.015982041618263439 ;
+k1qc7              =   -0.010587687816317385 ;
+k1qt1              =  -0.0042855375690279201 ;
+chicane6             = -0.00031317154628345126 ;
+chicane7             =   0.0041942589882898416 ;
+
+// Match the exit beam parameters
+match,sequence = ir_monochrom_down,
+beta0=initial;
+weight, mux=1000, muy=1000, dx=1000, dpx=1000;
+
+constraint, range = QC4.3/#e, betx<5000, bety<7500;
+constraint, range = sy2r.5/qa6.3, dx = 0, dpx = 0;
+constraint, range = sy1r.5, bety=6295;
+constraint, range = sy2r.5, bety=6295;
+constraint, range= sy1r.5, MUX= 0.5, MUY = 0.75;
+constraint, range= sy2r.5, MUX= 1, MUY = 1.25;
+constraint, range = fg.5, betx=70.693285692853792, bety=21.499640723017063;
+constraint, range = fg.5, alfx=-2.0980736969731177, alfy=0.81240088455229431;
+constraint, range = fg.5, dx = 0.1457954579883558, dpx = 0.0042952027113624851;
+
+// the quadrupoles located in the dispersion-free region used to match the beta function. used for match beta function latter.
+vary, name = k1qa1, step = 1.0E-5, lower= -k, upper = k;
+vary, name = k1qa2, step = 1.0E-5, lower= -k, upper = k;
+vary, name = k1qa3, step = 1.0E-5, lower= -k, upper = k;
+vary, name = k1qa4, step = 1.0E-5, lower= -k, upper = k;
+vary, name = k1qa5, step = 1.0E-5, lower= -k, upper = k;
+vary, name = k1qa6, step = 1.0E-5, lower= -k, upper = k;
+
+vary, name = k1QADD1, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD2, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD3, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD4, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD5, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD6, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD7, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD8, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD9, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD10, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD11, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1QADD12, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1qy1, step = 1.0E-7, lower= -k, upper = k;
+vary, name = k1qy2, step = 1.0E-7, lower= -k, upper = k;
+//the standard quadrupoles.
+vary, name = k1qc2r2, step = 1.0E-5;
+vary, name = k1qc2r1, step = 1.0E-5;
+vary, name = k1qc1r3, step = 1.0E-5;
+vary, name = k1qc1r2, step = 1.0E-5;
+vary, name = k1qc1r1, step = 1.0E-5;
+vary, name = k1QC4, step = 1.0E-5;
+vary, name = k1QC3, step = 1.0E-5;
+vary, name = k1QC5, step = 1.0E-5;
+vary, name = k1QC6, step = 1.0E-5;
+vary, name = k1QC7, step = 1.0E-5;
+vary, name = k1qt1, step = 1.0E-5;
+
+vary, name = chicane6, step = 1.0E-8;
+vary, name = chicane7, step = 1.0E-8;
+
+//matching methods
+lmdif,calls=500000,tolerance=1.e-10;
+endmatch;
+
+match,sequence = ir_monochrom_down,
+beta0=initial;
+
+constraint, range = fg.5, betx=70.693285692853792, bety=21.499640723017063;
+constraint, range = fg.5, alfx=-2.0980736969731177, alfy=0.81240088455229431;
+constraint, range = fg.5, dx = 0.1457954579883558, dpx = 0.0042952027113624851;
+
+vary, name = k1qa1, step = 1.0E-5, lower= -k, upper = k;
+vary, name = k1qa2, step = 1.0E-5, lower= -k, upper = k;
+vary, name = k1qa3, step = 1.0E-5, lower= -k, upper = k;
+vary, name = k1qa4, step = 1.0E-5, lower= -k, upper = k;
+vary, name = k1qa5, step = 1.0E-5, lower= -k, upper = k;
+vary, name = k1qa6, step = 1.0E-5, lower= -k, upper = k;
+
+lmdif,calls=500000,tolerance=1.e-16;
+endmatch;
+
+VALUE	,	
+k1qa1	,
+k1qa2	,
+k1qa3	,
+k1qa4	,
+k1qa5	,
+k1qa6	,
+k1qadd1	,
+k1qadd2	,
+k1qadd3	,
+k1qadd4	,
+k1qadd5	,
+k1qadd6	,
+k1qadd7	,
+k1qadd8	,
+k1qadd9	,
+k1qadd10	,
+k1qadd11	,
+k1qadd12	,
+k1qy1	,
+k1qy2	,
+k1qc2r2	,
+k1qc2r1	,
+k1qc1r3	,
+k1qc1r2	,
+k1qc1l1	,
+k1qc4	,
+k1qc3	,
+k1qc5	,
+k1qc6	,
+k1qc7	,
+k1qt1	,
+chicane6,
+chicane7;
+
+
+SELECT, FLAG=TWISS, CLEAR;
+SELECT, FLAG=TWISS, column=NAME,KEYWORD,S,L,BETX,ALFX,MUX,BETY,ALFY,MUY,DX,DPX;
+
+Twiss,
+sequence = ir_monochrom_down,
+beta0 = initial,
+rmatrix,
+chrom,
+file = 'ir_monochrom_down_match.tfs';
+plot, haxis=s, vaxis1=betx,bety, vaxis2=dx, colour=100, range= #s/#e, noversion=true, file="ir_monochrom_down_match";
+
+// matched survey!
+select, flag=survey, column=name,s,angle,theta,x,y,z,l,keyword;
+survey,
+TABLE = survey,
+THETA0 = HalfCrossingAngle,
+file="ir_monochrom_down_match.survey";
+exit;

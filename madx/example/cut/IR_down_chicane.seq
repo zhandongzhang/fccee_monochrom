@@ -6,6 +6,8 @@ sequence: bc1P1+ drift+ qadd1 +drift +bc1P2 + drift+ qadd2+ drift +bc1P3
 (initial the length of drift is 0.3meter.)
 lbc1P1+drift+lqadd1+drift+lbc1P2+drift+lqadd2+drift+lbc1P3=lbc1;
  */
+
+// created by Hongping Jiang and modified by Zhandong Zhang
 // values of the new elements. the initial dipoles are the same.
 // lqadd1 is short for the Length of Quadrupole ADD Number 1. (LQADD1)
 lqadd := 1;
@@ -23,30 +25,30 @@ lqadd11:= lqadd;
 lqadd12:= lqadd;
 //ldrift is short for Length of the DRIFT.
 ldrift:=0.3;
-chicane1:=0;
-chicane3:=0;
-chicane4:=0;
-chicane5:=0;
+chicane1 := (86.83779157613800*chicane6)/88.91844529502770;
+chicane3 := (86.83779157613800*chicane7)/79.77632319765640;
+chicane4 := -(chicane1+chicane6);
+chicane5 := -(chicane3+chicane7);
 chicane6:=0;
 chicane7:=0;
-anglebc1p1:= chicane1;
-anglebc1p2:= anglebc1;
-anglebc1p3:=-chicane1;
-anglebc3p1:= chicane3;
-anglebc3p2:= anglebc3;
-anglebc3p3:=-chicane3;
-anglebc4p1:= chicane4;
-anglebc4p2:= anglebc4;
-anglebc4p3:=-chicane4;
-anglebc5p1:= chicane5;
-anglebc5p2:= anglebc5;
-anglebc5p3:=-chicane5;
-anglebc6p1:= chicane6;
-anglebc6p2:= anglebc6;
-anglebc6p3:=-chicane6;
-anglebc7p1:= chicane7;
-anglebc7p2:= anglebc7;
-anglebc7p3:=-chicane7;
+anglebc1p1:= anglebc1/3+chicane1/3;
+anglebc1p2:= anglebc1/3+chicane1/3;
+anglebc1p3:= anglebc1/3+chicane1/3;
+anglebc3p1:= anglebc3/3+chicane3/3;
+anglebc3p2:= anglebc3/3+chicane3/3;
+anglebc3p3:= anglebc3/3+chicane3/3;
+anglebc4p1:= anglebc4/3+chicane4/3;
+anglebc4p2:= anglebc4/3+chicane4/3;
+anglebc4p3:= anglebc4/3+chicane4/3;
+anglebc5p1:= anglebc5/3+chicane5/3;
+anglebc5p2:= anglebc5/3+chicane5/3;
+anglebc5p3:= anglebc5/3+chicane5/3;
+anglebc6p1:= anglebc6/3+chicane6/3;
+anglebc6p2:= anglebc6/3+chicane6/3;
+anglebc6p3:= anglebc6/3+chicane6/3;
+anglebc7p1:= anglebc7/3+chicane7/3;
+anglebc7p2:= anglebc7/3+chicane7/3;
+anglebc7p3:= anglebc7/3+chicane7/3;
 
 // the initial of the strength of added Quadrupoles(k1qadd1) are zero.
 // lbc1P1 is short for the Length of the BC1 Part1(LBC1P1).

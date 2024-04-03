@@ -26,8 +26,12 @@ lqadd2:=lqadd;
 lqadd3:=lqadd;
 ldrift:=0.3;
 
-chicane5l := 0;
-chicane3l := (84.6704718996*chicane5l)/74.9562948644;
+chicanewl := (119.512952940881*chicane4l)/329.550458394071;
+chicane1l := (119.512952940881*chicane5l)/303.211179637001;
+chicane2l := -(chicanewl+chicane4l);
+chicane3l := -(chicane1l+chicane5l);
+chicane4l = 0;
+chicane5l = 0;
 
 k1qadd1:= 0.0;
 k1qadd2:= 0.0;
@@ -76,29 +80,29 @@ lbwlp1:= (lbwl-2*lqadd1-4*ldrift)/3;
 lbwlp2:= (lbwl-2*lqadd1-4*ldrift)/3;
 lbwlp3:= (lbwl-2*lqadd1-4*ldrift)/3;
 
-anglebc1lp1:= anglebc1l/3;
-anglebc1lp2:= anglebc1l/3;
-anglebc1lp3:= anglebc1l/3;
+anglebc1lp1:= anglebc1l/3+chicane1l/3;
+anglebc1lp2:= anglebc1l/3+chicane1l/3;
+anglebc1lp3:= anglebc1l/3+chicane1l/3;
 
-anglebc2lp1:= anglebc2l/3;
-anglebc2lp2:= anglebc2l/3;
-anglebc2lp3:= anglebc2l/3;
+anglebc2lp1:= anglebc2l/3+chicane2l/3;
+anglebc2lp2:= anglebc2l/3+chicane2l/3;
+anglebc2lp3:= anglebc2l/3+chicane2l/3;
 
-anglebc3lp1:= anglebc3l/3+chicane3l;
-anglebc3lp2:= anglebc3l/3;
-anglebc3lp3:= anglebc3l/3;
+anglebc3lp1:= anglebc3l/3+chicane3l/3;
+anglebc3lp2:= anglebc3l/3+chicane3l/3;
+anglebc3lp3:= anglebc3l/3+chicane3l/3;
 
-anglebc4lp1:= anglebc4l/3;
-anglebc4lp2:= anglebc4l/3-(chicane5l+chicane3l);
-anglebc4lp3:= anglebc4l/3;
+anglebc4lp1:= anglebc4l/3+chicane4l/3;
+anglebc4lp2:= anglebc4l/3+chicane4l/3;
+anglebc4lp3:= anglebc4l/3+chicane4l/3;
 
-anglebc5lp1:= anglebc5l/3;
-anglebc5lp2:= anglebc5l/3;
-anglebc5lp3:= anglebc5l/3+chicane5l;
+anglebc5lp1:= anglebc5l/3+chicane5l/3;
+anglebc5lp2:= anglebc5l/3+chicane5l/3;
+anglebc5lp3:= anglebc5l/3+chicane5l/3;
 
-anglebwlp1:= anglebwl/3;
-anglebwlp2:= anglebwl/3;
-anglebwlp3:= anglebwl/3;
+anglebwlp1:= anglebwl/3+chicanewl/3;
+anglebwlp2:= anglebwl/3+chicanewl/3;
+anglebwlp3:= anglebwl/3+chicanewl/3;
 
 //new dipoles for bc1l
 bc1lp1: rbend, l:= lbc1lp1 ,angle:= anglebc1lp1,e1:=0 *anglebc1lp1,e2:=0 * anglebc1lp1;
