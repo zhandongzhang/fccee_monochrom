@@ -17,6 +17,6 @@ Calculate luminosity of monochromatizaiton mode with beam size or with monochrom
 Check the beamstrahlung formula from Macro's IPAC'17 paper.
 doi:10.18429/JACoW-IPAC2017-WEPIK015
 
-5. **BS_Macro2017_monochromatization**
+5. **BS_Macro2017_monochromatization.nb**
 
 Calculated the energy spread, horizontal emittance and bunch length with horizontal dispersion at the IP.
